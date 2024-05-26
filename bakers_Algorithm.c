@@ -34,10 +34,21 @@ int main(void) {
         inter_process_instance.B_Instance -= P[i].B_Alloc;
         inter_process_instance.C_Instance -= P[i].C_Alloc;
     }
+
     i = 0;
     while (true) {
         if (P[i].State && inter_process_instance.A_Instance + P[i].A_Alloc >= P[i].A_Max) {
-            printf(1);
+            //프로세스 시작
+            //프로세스 종료 반환 시작
+            P[i].State = false;
+            inter_process_instance.A_Instance += P[i].A_Alloc;
+            inter_process_instance.B_Instance += P[i].B_Alloc;
+            inter_process_instance.C_Instance += P[i].C_Alloc;
+            printf("Process %d end", i);
+            i = 0;
+        }
+        else {
+            i++;
         }
     }
 
@@ -61,19 +72,19 @@ INSTANCE Set_Instance() {
 
 PROCESS Set_Process() {
     PROCESS temporary_Process;
-    printf("Max A : \n");
-    scanf("%d", &temporary_Process.A_Max);
-    printf("Max B : \n");
-    scanf("%d", &temporary_Process.B_Max);
-    printf("Max C : \n");
-    scanf("%d", &temporary_Process.C_Max);
+    printf("Max A : ");
+    scanf("%d\n", &temporary_Process.A_Max);
+    printf("Max B : ");
+    scanf("%d\n", &temporary_Process.B_Max);
+    printf("Max C : ");
+    scanf("%d\n", &temporary_Process.C_Max);
     
-    printf("Allocation A : \n");
-    scanf("%d", &temporary_Process.A_Alloc);
-    printf("Allocation B : \n");
-    scanf("%d", &temporary_Process.B_Alloc);
-    printf("Allocation C : \n");
-    scanf("%d", &temporary_Process.C_Alloc);
+    printf("Allocation A : ");
+    scanf("%d\n", &temporary_Process.A_Alloc);
+    printf("Allocation B : ");
+    scanf("%d\n", &temporary_Process.B_Alloc);
+    printf("Allocation C : ");
+    scanf("%d\n", &temporary_Process.C_Alloc);
     temporary_Process.State = true;
     return temporary_Process;
 }
