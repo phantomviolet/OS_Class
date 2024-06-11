@@ -1,6 +1,8 @@
 import threading
 import time
 
+#완성
+
 shared_resource = 0
 new_lock = threading.Lock()
 
